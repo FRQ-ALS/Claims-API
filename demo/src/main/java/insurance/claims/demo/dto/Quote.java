@@ -24,7 +24,6 @@ public class Quote {
             strategy = GenerationType.SEQUENCE,
             generator = "quote_sequence"
     )
-
     private long quoteID;
     private long vehicleID;
     private long userID;
@@ -33,6 +32,20 @@ public class Quote {
     private double yearlyQuoteValue;
     private double monthlyQuoteValue;
     private boolean userAcceptance;
+    private String regNumber;
+    private String status;
 
-
+    public Quote(long vehicleID, long userID, int driverAge,
+                 LocalDateTime quoteExpiry, double yearlyQuoteValue,
+                 double monthlyQuoteValue, boolean userAcceptance, String regNumber) {
+        this.vehicleID = vehicleID;
+        this.userID = userID;
+        this.driverAge = driverAge;
+        this.quoteExpiry = quoteExpiry;
+        this.yearlyQuoteValue = yearlyQuoteValue;
+        this.monthlyQuoteValue = monthlyQuoteValue;
+        this.userAcceptance = userAcceptance;
+        this.status = "active";
+        this.regNumber = regNumber;
+    }
 }

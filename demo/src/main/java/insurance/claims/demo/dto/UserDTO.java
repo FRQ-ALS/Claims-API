@@ -14,4 +14,5 @@ public class UserDTO {
     private String firstName;
     private String lastName;
     private int age;
+    private boolean carRegistered;
 }

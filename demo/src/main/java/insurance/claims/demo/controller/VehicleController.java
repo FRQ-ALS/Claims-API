@@ -3,13 +3,10 @@ package insurance.claims.demo.controller;
 import insurance.claims.demo.dto.Vehicle;
 import insurance.claims.demo.dto.VehicleRegistrationRequest;
 import insurance.claims.demo.service.VehicleService;
-import org.apache.coyote.Response;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/vehicles")
@@ -23,8 +20,6 @@ public class VehicleController {
         this.vehicleService = vehicleService;
     }
 
-
-
     //endpoint for user vehicle registration
 
     @RequestMapping(path = "/register", method = RequestMethod.POST)
@@ -33,5 +28,12 @@ public class VehicleController {
 
         return ResponseEntity.ok(vehicleService.registerVehicle(vehicleRegistrationRequest));
     }
+
+    @GetMapping(path = "/get/{userid}")
+
+    public ResponseEntity<?> getVehicle(@PathVariable("userid") long userID){
+        return ResponseEntity.ok(vehicleService.getVehicle(userID));
+    }
+
 
 }

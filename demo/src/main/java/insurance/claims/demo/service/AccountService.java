@@ -4,33 +4,35 @@ package insurance.claims.demo.service;
 import insurance.claims.demo.common.InvalidUserException;
 import insurance.claims.demo.dto.*;
 import insurance.claims.demo.repository.AccountRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 public class AccountService {
-
+    Logger log = LoggerFactory.getLogger(AccountService.class);
     @Autowired
     private AccountRepository accountRepository;
-
     public GenericResponse registerAccount(RegistrationRequest request) {
 
+        //Checking whether email is taken
         if (accountRepository.findByEmail(request.getEmail()).isPresent()) {
             return new GenericResponse(false,
                     "Email already exists!");
         }
 
-        User user = new User(
+        AppUser appUser = new AppUser(
                 request.getEmail(),
                 request.getPassword()
         );
-        accountRepository.save(user);
+        accountRepository.save(appUser);
 
-        if (verifyAccountHasBeenCreated(user)) {
+        if (verifyAccountHasBeenCreated(request.getEmail())) {
+
+            log.info("Account created with email: "+ appUser.getEmail());
             return new GenericResponse(true, "Your account has been created");
         }
 
@@ -39,16 +41,14 @@ public class AccountService {
 
 
     //method checks whether user exists in database
-    private boolean verifyAccountHasBeenCreated(User user) {
-        return accountRepository.findByEmail(user.getEmail()) != null;
+    private boolean verifyAccountHasBeenCreated(String email) {
+        return accountRepository.findByEmail(email).isPresent();
     }
-
-
 
     //method that verifies user login and returns user details
     public UserDTO login(LoginRequest request) {
 
-        Optional<User> user = accountRepository.findByEmail(request.getEmail());
+        Optional<AppUser> user = accountRepository.findByEmail(request.getEmail());
 
         if (user.isEmpty()) throw new InvalidUserException("User with that email is not found");
 
@@ -56,8 +56,14 @@ public class AccountService {
             throw new InvalidUserException("Incorrect email or password");
         }
 
-        return new UserDTO(user.get().getUserID(),
-                user.get().getFirstName(), user.get().getLastName(), user.get().getAge());
+        AppUser appUser = user.get();
 
+        log.info("ID: " + appUser.getUserID());
+
+        return new UserDTO(appUser.getUserID(),
+                appUser.getFirstName(),
+                appUser.getFirstName(),
+                appUser.getAge(),
+                appUser.isRegisteredCar());
     }
 }

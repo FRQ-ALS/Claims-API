@@ -8,12 +8,12 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity(name = "users")
+@Entity
 @Getter
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
-public class User {
+public class AppUser {
     @SequenceGenerator(
             name = "user_sequence",
             sequenceName = "user_sequence",
@@ -32,14 +32,14 @@ public class User {
     private int age;
     private boolean registeredCar;
 
-    public User(String email, String firstName, String lastName, String password) {
+    public AppUser(String email, String firstName, String lastName, String password) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
     }
 
-    public User(String email, String password) {
+    public AppUser(String email, String password) {
         this.email = email;
         this.password = password;
         this.registeredCar = false;

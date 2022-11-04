@@ -10,6 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class QuoteRequest {
-    public String test;
-
+    public long vehicleID;
+    public long userID;
 }

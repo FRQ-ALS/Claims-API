@@ -32,15 +32,15 @@ public class Vehicle {
     private String registrationNumber;
     private String make;
     private String model;
-    @Enumerated
     private String colour;
     private String vinNumber;
     private int yearOfManufacture;
     private double estimatedValue;
 
     private BigInteger mileage;
-
     private String fuelType;
+
+    private boolean isInsured;
 
 
 
@@ -56,6 +56,7 @@ public class Vehicle {
         this.estimatedValue = estimatedValue;
         this.mileage = mileage;
         this.fuelType = fuelType;
+        this.isInsured = false;
     }
 
 }
