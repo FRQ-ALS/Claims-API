@@ -29,8 +29,8 @@ public class User {
     private String firstName;
     private String lastName;
     private String password;
-
     private int age;
+    private boolean registeredCar;
 
     public User(String email, String firstName, String lastName, String password) {
         this.email = email;
@@ -42,5 +42,6 @@ public class User {
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+        this.registeredCar = false;
     }
 }
