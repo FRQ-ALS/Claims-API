@@ -1,6 +1,7 @@
 package insurance.claims.demo.controller;
 
 import insurance.claims.demo.dto.QuoteRequest;
+import insurance.claims.demo.dto.QuoteResponse;
 import insurance.claims.demo.service.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +19,15 @@ public class QuoteController {
         return ResponseEntity.ok(quoteService.generateQuote(quoteRequest));
     }
 
-
     @GetMapping(path = "/getQuotes/{userID}")
     public ResponseEntity<?> getQuotes(@PathVariable("userID") long userID) {
 
         return ResponseEntity.ok(quoteService.getQuotes(userID));
+    }
+
+    @PostMapping(path = "/quoteResponse")
+    public ResponseEntity<?> quoteResponse(@RequestBody QuoteResponse response) {
+
+        return ResponseEntity.ok(quoteService.quoteResponse(response));
     }
 }

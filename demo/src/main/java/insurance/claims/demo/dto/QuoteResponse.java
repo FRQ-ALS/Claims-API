@@ -1,5 +1,6 @@
 package insurance.claims.demo.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,8 +10,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClaimRequest {
+public class QuoteResponse {
+    private long quoteID;
     private long userID;
-    private long insuranceID;
-    private long vehicleID;
+    private String paymentType;
 }

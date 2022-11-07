@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -25,20 +26,19 @@ public class Claim {
                 generator = "claim_sequence"
         )
         private long claimId;
-        private String VIN;
+
+        private long userID;
         private long insuranceNo;
         private double claimAmount;
-        private String make;
-        private String model;
-        private long year;
+        private LocalDateTime claimExpiry;
 
-        public Claim(String VIN, long insuranceNo, double claimAmount, String make, String model, long year) {
-                this.VIN = VIN;
+        private boolean expired;
+
+        public Claim(long insuranceNo, double claimAmount, LocalDateTime claimExpiry, long userID) {
                 this.insuranceNo = insuranceNo;
                 this.claimAmount = claimAmount;
-                this.make = make;
-                this.model = model;
-                this.year = year;
+                this.claimExpiry = claimExpiry;
+                this.userID = userID;
+                this.expired = false;
         }
-
 }

@@ -18,7 +18,4 @@ public interface AccountRepository extends JpaRepository<AppUser, Long> {
     @Query("UPDATE AppUser a SET a.registeredCar = TRUE WHERE a.userID =?1")
     void setCarRegistryToTrue(long userID);
 
-//    update app_user set registered_car = true where userid =?1
-
-    //UPDATE AppUser u SET u.registeredCar = TRUE WHERE u.userID = ?1
 }
