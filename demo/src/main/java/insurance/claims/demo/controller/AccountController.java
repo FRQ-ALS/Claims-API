@@ -1,9 +1,10 @@
 package insurance.claims.demo.controller;
 
 
-import insurance.claims.demo.service.AccountService;
+import insurance.claims.demo.service.AppUserService;
 import insurance.claims.demo.dto.LoginRequest;
 import insurance.claims.demo.dto.RegistrationRequest;
+import insurance.claims.demo.service.LoginAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,17 +17,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class AccountController {
 
     @Autowired
-    private AccountService accountService;
+    private AppUserService appUserService;
+
+    @Autowired
+    private LoginAuthenticationService loginAuthenticationService;
 
     @PostMapping(path ="/register")
     public ResponseEntity<?> registerAccount(@RequestBody RegistrationRequest request){
 
-        return ResponseEntity.ok(accountService.registerAccount(request));
+        return ResponseEntity.ok(appUserService.registerAccount(request));
     }
 
     @PostMapping(path="/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) throws Exception {
 
-        return ResponseEntity.ok(accountService.login(request));
+        return ResponseEntity.ok(loginAuthenticationService.login(request));
     }
 }

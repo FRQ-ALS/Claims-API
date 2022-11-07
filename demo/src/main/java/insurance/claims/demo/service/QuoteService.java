@@ -38,9 +38,10 @@ public class QuoteService {
 
     public Quote generateQuote(QuoteRequest request) {
 
-
         Vehicle vehicle = vehicleRepository.findById(request.getVehicleID()).get();
         AppUser appUser = accountRepository.findById(request.getUserID()).get();
+
+        if(vehicle.isInsured()) throw new IllegalStateException("Vehicle already insured");
 
         QuoteParameters parameters = new QuoteParameters(
                 appUser.getAge(),
@@ -134,5 +135,6 @@ public class QuoteService {
 
         return 0.0;
     }
+
 
 }

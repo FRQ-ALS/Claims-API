@@ -33,6 +33,7 @@ public class VehicleController {
 
     public ResponseEntity<?> getVehicle(@PathVariable("userid") long userID){
         return ResponseEntity.ok(vehicleService.getVehicle(userID));
+
     }
 
 
