@@ -50,7 +50,10 @@ public class AppUserService implements UserDetailsService {
 
         AppUser appUser = new AppUser(
                 request.getEmail(),
-                encodedPassword
+                request.getFirstName(),
+                request.getLastName(),
+                encodedPassword,
+                request.getAge()
         );
 
         accountRepository.save(appUser);

@@ -14,6 +14,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClaimResponse {
-    public double claimAmount;
+    public String claimAmount;
     private LocalDateTime claimExpiry;
 }

@@ -9,6 +9,7 @@ import net.bytebuddy.matcher.FilterableList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +60,10 @@ public class InsuranceService {
     //method that generates a claim
     public ClaimResponse makeInsuranceClaim(ClaimRequest request) {
 
+        //decimal formatter to set claim amount to 2 decimal places
+
+        DecimalFormat df = new DecimalFormat("0.00");
+
         //checking if a claim already exists, in which case we just return that claim
         if (checkClaimExists((request.getInsuranceID()))) {
             Claim claim = claimRepository.
@@ -90,7 +95,7 @@ public class InsuranceService {
 
         Claim claim = new Claim(
                 request.getInsuranceID(),
-                claimAmount,
+                df.format(claimAmount),
                 LocalDateTime.now().plusDays(5),
                 request.getUserID()
         );

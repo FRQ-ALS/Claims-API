@@ -29,12 +29,11 @@ public class Claim {
 
         private long userID;
         private long insuranceNo;
-        private double claimAmount;
+        private String claimAmount;
         private LocalDateTime claimExpiry;
-
         private boolean expired;
 
-        public Claim(long insuranceNo, double claimAmount, LocalDateTime claimExpiry, long userID) {
+        public Claim(long insuranceNo, String claimAmount, LocalDateTime claimExpiry, long userID) {
                 this.insuranceNo = insuranceNo;
                 this.claimAmount = claimAmount;
                 this.claimExpiry = claimExpiry;

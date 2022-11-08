@@ -35,11 +35,12 @@ public class AppUser implements UserDetails {
     private int age;
     private boolean registeredCar;
 
-    public AppUser(String email, String firstName, String lastName, String password) {
+    public AppUser(String email, String firstName, String lastName, String password, int age) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
+        this.age = age;
     }
 
     public AppUser(String email, String password) {

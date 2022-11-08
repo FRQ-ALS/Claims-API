@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-//class verifies whether a jwt  is valid or not
+//class verifies whether a jwt  is valid or not and stores that information
+//in the spring security context
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
@@ -26,7 +27,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtUtil jwtUtil;
-
 
 
 

@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/vehicles")
+@RequestMapping(path = "/api/v1/vehicles")
 public class VehicleController {
 
     @Autowired
@@ -35,6 +35,4 @@ public class VehicleController {
         return ResponseEntity.ok(vehicleService.getVehicle(userID));
 
     }
-
-
 }

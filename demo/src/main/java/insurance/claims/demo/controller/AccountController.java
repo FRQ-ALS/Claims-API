@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/account")
+@RequestMapping(path = "/api/v1/account")
 public class AccountController {
 
     @Autowired
@@ -28,7 +28,7 @@ public class AccountController {
         return ResponseEntity.ok(appUserService.registerAccount(request));
     }
 
-    @PostMapping(path="/login")
+    @PostMapping(path="/authenticate")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) throws Exception {
 
         return ResponseEntity.ok(loginAuthenticationService.login(request));

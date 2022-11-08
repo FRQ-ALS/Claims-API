@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.NamedStoredProcedureQuery;
 
 @RestController
-@RequestMapping(path = "/insurance")
+@RequestMapping(path = "/api/v1/insurance")
 public class InsuranceController {
 
     @Autowired

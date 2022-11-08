@@ -72,7 +72,7 @@ public class QuoteService {
 
     public List<Quote> getQuotes(long userID) {
 
-        return quoteRepository.findAllByuserID(userID);
+        return quoteRepository.findAllByuserIDAndUserAcceptance(userID, false);
     }
 
     //this method checks whether the user has an active quote for that particular car

@@ -15,7 +15,7 @@ import java.util.Optional;
 public interface QuoteRepository extends JpaRepository<Quote, Long> {
 
     Optional<Quote> findByUserIDAndVehicleID(long userID, long vehicleID);
-    List<Quote> findAllByuserID(long userID);
+    List<Quote> findAllByuserIDAndUserAcceptance(long userID, boolean acceptance);
 
     @Modifying
     @Transactional
