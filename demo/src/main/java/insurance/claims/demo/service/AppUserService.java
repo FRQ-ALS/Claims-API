@@ -5,6 +5,7 @@ import insurance.claims.demo.common.InvalidUserException;
 import insurance.claims.demo.config.JwtUtil;
 import insurance.claims.demo.dto.*;
 import insurance.claims.demo.repository.AccountRepository;
+import insurance.claims.demo.repository.VehicleRepository;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,9 @@ public class AppUserService implements UserDetailsService {
 
     @Autowired
     private JwtUtil jwtUtil;
+
+    @Autowired
+    private VehicleRepository vehicleRepository;
 
 
     public GenericResponse registerAccount(RegistrationRequest request) {
@@ -82,4 +86,20 @@ public class AppUserService implements UserDetailsService {
                 ()-> new UsernameNotFoundException(
                         String.format("User with email %s not found", email)));
     }
+
+    public ProfileDTO getUserProfile(long userID){
+        Vehicle vehicle =vehicleRepository.findByUserID(userID).get();
+
+        AppUser user = accountRepository.findById(userID).get();
+
+        return new ProfileDTO(
+                (user.getFirstName()+" "+user.getLastName()),
+                user.getAge(),
+                vehicle.getRegistrationNumber(),
+                vehicle.getMake(),
+                vehicle.getYearOfManufacture()
+        );
+    }
 }
+
+

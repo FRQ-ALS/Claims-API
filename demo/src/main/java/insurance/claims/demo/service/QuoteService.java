@@ -38,6 +38,10 @@ public class QuoteService {
 
     public Quote generateQuote(QuoteRequest request) {
 
+        if(checkWhetherUserHasActiveQuote(request.userID)){
+            throw new IllegalStateException("User already has active quote");
+        }
+
         Vehicle vehicle = vehicleRepository.findById(request.getVehicleID()).get();
         AppUser appUser = accountRepository.findById(request.getUserID()).get();
 
@@ -50,6 +54,7 @@ public class QuoteService {
                 vehicle.getColour(),
                 vehicle.getFuelType()
         );
+
         //generating quotes using quotegenerator
         //Monthly value will not add up to annual intentionally
         HashMap<String, String> quotes = insuranceQuoteGenerator.createQuote(parameters);
@@ -74,21 +79,6 @@ public class QuoteService {
 
         return quoteRepository.findAllByuserIDAndUserAcceptance(userID, false);
     }
-
-    //this method checks whether the user has an active quote for that particular car
-    //quotes can only be generated again once the quote expires or if they reject it
-    public boolean checkUserHasActiveQuote(long quoteID, long vehicleID) {
-
-        Optional<Quote> quote = quoteRepository
-                .findByUserIDAndVehicleID(quoteID, vehicleID);
-
-        if (quote.isEmpty()) return false;
-
-        if (LocalDateTime.now().isBefore(quote.get().getQuoteExpiry())) return true;
-
-        return false;
-    }
-
 
     public GenericResponse quoteResponse(QuoteResponse response) {
         Optional<Quote> quote = quoteRepository.findById(response.getQuoteID());
@@ -134,6 +124,18 @@ public class QuoteService {
         if (type.equals("monthly")) return quote.getMonthlyQuoteValue();
 
         return 0.0;
+    }
+
+    //method checks whether user has active quotes
+    public boolean checkWhetherUserHasActiveQuote(long userID) {
+        List<Quote> quoteList = quoteRepository.findAllByuserID(userID);
+
+        for(int i =0; i < quoteList.size(); i++) {
+            if(quoteList.get(i).getQuoteExpiry().isAfter(LocalDateTime.now())){
+                return true;
+            }
+        }
+        return false;
     }
 
 
