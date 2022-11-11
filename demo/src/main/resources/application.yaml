@@ -1,18 +1,34 @@
-server:
-  error:
-    include-message: always
-    include-binding-errors: always
+#server:
+#  error:
+#    include-message: always
+#    include-binding-errors: always
+#
+#spring:
+#  datasource:
+#    password: pass
+#    url: jdbc:postgresql://localhost:5432/claims
+#    username: postgres
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+#        format_sql: true
+#    show-sql: true
 
-spring:
+server:
+  port: 5000
+
+#spring:
+#  profiles:
+#    active: demo
+app:
   datasource:
-    password: pass
-    url: jdbc:postgresql://localhost:5432/claims
+    jdbc-url: jdbc:postgresql://claims.c5y4t1dqrn9g.eu-west-1.rds.amazonaws.com:5432/claims
     username: postgres
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
-    show-sql: true
+    password: farooq135
+    pool-size: 30
+
+
+
