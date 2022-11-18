@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.csrf().disable().authorizeRequests().antMatchers("/api/v1/account/**")
+        http.csrf().disable().authorizeRequests().antMatchers("/api/v1/account/**", "api/v1/images/**")
                 .permitAll().anyRequest().authenticated().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
@@ -66,6 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         provider.setPasswordEncoder(bCryptPasswordEncoder);
         provider.setUserDetailsService(appUserService);
         return provider;
+
     }
 
 
@@ -78,9 +79,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             }
         };
     }
-
-
-
-
-
 }
